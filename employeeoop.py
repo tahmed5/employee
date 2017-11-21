@@ -13,10 +13,21 @@ class Employee:
         Employee.num_of_emps += 1
         
     def fullname(self):
-        print(self.first, self.last)
+        return'{} {}'.format(self.first, self.last)
 
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amt)
+
+    def __repr__(self):
+        return "Employee('{}', '{}', '{}')".format(self.first, self.last, self.pay)
+
+    def __str__(self):
+        return '{} - {}'.format(self.fullname(),self.email)
+
+    def __add__(self,other):
+        return self.pay + other.pay
+
+        
 
     @classmethod
     def set_raise_amt(cls,amount):
@@ -59,18 +70,21 @@ class Manager(Employee):
     def print_emps(self):
         for emp in self.employees:
             print(emp.fullname())
-        
+
+
 dev_1 = Developer('Corey', 'Schafer', 50000, 'C++')
 dev_2 = Developer('Test', 'Employee', 60000, 'Python')
 
 mgr_1 = Manager('Sue', 'Smith', 90000, [dev_1])
 mgr_1.add_emp(dev_2)
 
-print(mgr_1.print_emps())
 
 emp_1 = Employee('James', 'Conway', 50000)
 emp_2 = Employee('Barack', 'Obama', 10000)
 
+print(str(emp_1))
+print(emp_1.fullname())
+print(emp_1 + emp_2)
 
 '''
 dev_1.apply_raise()
